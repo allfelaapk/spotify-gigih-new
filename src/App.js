@@ -1,24 +1,20 @@
 import logo from "./logo.svg";
 import "./App.css";
+import data from "./data";
 
 function App() {
   // const clientId = process.env.REACT_APP_CLIENT_ID;
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello World !</p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        {/* <p>{clientId}</p> */}
-      </header>
+    // <div className="App">
+    <div className="container">
+      <img src={data.album.images[1].url} />
+
+      <h1 className="artist">{data.album.artists[0].name}</h1>
+
+      <p className="name">{data.album.name}</p>
+      <button className="btn">Select</button>
     </div>
+    // </div>
   );
 }
 
