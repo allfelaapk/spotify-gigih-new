@@ -1,29 +1,50 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
 .App {
   text-align: center;
-  background-color: #f68989;
+  margin-top: 100px;
+}
+/* body {
+  background-color: #e0a366;
+} */
+body {
+  font-family: "Poppins", sans-serif;
+}
+.image-opt {
+  height: 100%;
 }
 
 .container {
-  border-radius: 5px solid black;
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
-  width: 200px;
+  width: 250px;
   margin: 0 auto;
-  background-color: #f6e7d8;
+  background-color: #191414;
   padding: 15px;
 }
 
 .artist {
   padding: 5px;
   text-align: center;
+  color: #fff;
 }
 .name {
   padding: 5px;
   text-align: center;
+  color: #fff;
 }
 .btn {
   border-radius: 5px;
-  padding: 7px 7px;
+  /* padding: 7px 2px; */
+  background-color: #1db954;
+  border: 0;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+
+  margin-top: 20px;
 }
 
 * {
