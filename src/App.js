@@ -4,6 +4,7 @@ import data from "./data";
 import Track from "./component/Track";
 import dataSpot from "./data/dataSpot";
 import React from "react";
+import Auth from "./pages/auth/Auth";
 
 function App() {
   // const clientId = process.env.REACT_APP_CLIENT_ID;
@@ -22,7 +23,7 @@ function App() {
         artist={data.album.artists[0].name}
         name={data.album.name}
       /> */}
-      <div className="container">
+      {/* <div className="container">
         {uniq.map((track) => (
           <React.Fragment key={track.album.id}>
             <Track
@@ -32,7 +33,8 @@ function App() {
             />
           </React.Fragment>
         ))}
-      </div>
+      </div> */}
+      <Auth />
     </div>
   );
 }
