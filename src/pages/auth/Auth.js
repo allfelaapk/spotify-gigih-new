@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Track from "../../component/Track";
-import "./search.css";
+
 import "../../App.css";
 
 export default class Auth extends Component {
@@ -24,36 +24,15 @@ export default class Auth extends Component {
   };
 
   redirectToSpotify() {
-    // const authEndpoint = "https://accounts.spotify.com/authorize";
-    // const redirectUri = "http://localhost:3000/";
-    // const client_id = "d816b2f689e44ea888e6c361ec59b7e3";
-    // const scopes = ["user-read-private", "user-read-email"];
-    // const loginUrl = `${authEndpoint}?client_id=${client_id}&redirect_uri=${redirectUri}&scope=${scopes.join(
-    //   "%20"
-    // )}&response_type=token&show_dialog=true
-    // `;
-
-    // return loginUrl;
-    const state_key = "spotify_auth_state";
-    const scopes = "playlist-modify-private";
-    let token = this.generateRandomString(16);
-    const redirect_uri = "http://localhost:3000/";
     const client_id = "d816b2f689e44ea888e6c361ec59b7e3";
 
-    const loginUrl =
-      "https://accounts.spotify.com/authorize?" +
-      "client_id=" +
-      encodeURIComponent(client_id) +
-      "&redirect_uri=" +
-      encodeURIComponent(redirect_uri) +
-      "&scope=" +
-      encodeURIComponent(scopes) +
-      "&response_type=token&state=" +
-      encodeURIComponent(token);
+    const scopes = "playlist-modify-private";
 
-    localStorage.setItem(state_key, token);
+    const redirect_uri = "http://localhost:3000/";
 
+    const loginUrl = `https://accounts.spotify.com/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}&scope=${scopes}&response_type=token&show_dialog=true`;
     window.location = loginUrl;
+    // return loginUrl;
   }
 
   componentDidMount() {
@@ -99,6 +78,11 @@ export default class Auth extends Component {
     console.log(this.state.token);
   }
 
+  logout() {
+    this.setState({ token: "" });
+    window.localStorage.removeItem("token");
+  }
+
   render() {
     // const { token } = this.state;
     // return (
@@ -109,7 +93,7 @@ export default class Auth extends Component {
     //   </>
     // );
 
-    const { searchList } = this.state;
+    const { searchList, token } = this.state;
 
     const renderItem = () => {
       return (
@@ -117,7 +101,7 @@ export default class Auth extends Component {
         searchList.map((track, index) => (
           <React.Fragment key={index}>
             <Track
-              image={track.album.images[0].url}
+              img={track.album.images[1].url}
               title={track.name}
               artist={track.artists[0].name}
               alt={track.name}
@@ -129,24 +113,34 @@ export default class Auth extends Component {
 
     return (
       <>
-        <button className="button" onClick={() => this.redirectToSpotify()}>
-          SPOTIFY
-        </button>
+        {!token ? (
+          <button className="button" onClick={() => this.redirectToSpotify()}>
+            SPOTIFY
+          </button>
+        ) : (
+          <button className="button" onClick={() => this.logout()}>
+            {" "}
+            Logout
+          </button>
+        )}
 
-        <form className="form-search" onSubmit={(e) => this.searchTrack(e)}>
-          <input
-            onChange={(e) => {
-              this.handleInput(e);
-            }}
-            type="text"
-            name="search"
-            placeholder="Artist, Song, or Album"
-            value={this.state.search}
-          />
-          <input type="submit" value="Search" />
-        </form>
-
-        <div className="container">{renderItem()}</div>
+        {token && (
+          <>
+            <form className="form-search" onSubmit={(e) => this.searchTrack(e)}>
+              <input
+                onChange={(e) => {
+                  this.handleInput(e);
+                }}
+                type="text"
+                name="search"
+                placeholder="Artist, Song, or Album"
+                value={this.state.search}
+              />
+              <input type="submit" value="Search" />
+            </form>
+            <div className="container">{renderItem()}</div>
+          </>
+        )}
       </>
     );
   }

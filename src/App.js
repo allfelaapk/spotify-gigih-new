@@ -5,6 +5,7 @@ import Track from "./component/Track";
 import dataSpot from "./data/dataSpot";
 import React from "react";
 import Auth from "./pages/auth/Auth";
+import AuthHook from "./pages/auth/AuthHook";
 
 function App() {
   // const clientId = process.env.REACT_APP_CLIENT_ID;
@@ -34,7 +35,9 @@ function App() {
           </React.Fragment>
         ))}
       </div> */}
-      <Auth />
+      {/* <Auth /> */}
+
+      <AuthHook />
     </div>
   );
 }
