@@ -101,13 +101,14 @@ export default function AuthHook() {
         <>
           <form className="form-search" onSubmit={searchTrack}>
             <input
+              className="searchInput"
               onChange={handleInput}
               type="text"
               name="search"
               placeholder="Artist, Song, or Album"
               value={searchKey}
             />
-            <input type="submit" value="Search" />
+            <input className="searchSubmit" type="submit" value="Search" />
           </form>
 
           <div className="container">

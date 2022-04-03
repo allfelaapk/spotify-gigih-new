@@ -6,6 +6,7 @@ import dataSpot from "./data/dataSpot";
 import React from "react";
 import Auth from "./pages/auth/Auth";
 import AuthHook from "./pages/auth/AuthHook";
+import Home from "./pages/auth/Home";
 
 function App() {
   // const clientId = process.env.REACT_APP_CLIENT_ID;
@@ -36,8 +37,9 @@ function App() {
         ))}
       </div> */}
       {/* <Auth /> */}
+      <Home />
 
-      <AuthHook />
+      {/* <AuthHook /> */}
     </div>
   );
 }
