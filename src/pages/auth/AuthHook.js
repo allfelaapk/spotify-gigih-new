@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Track from "../../component/Track";
+import { authToken } from "../../redux/action";
 
 export default function AuthHook() {
-  const [token, setToken] = useState("");
+  // const [token, setToken] = useState("");
   const [searchKey, setSearchKey] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const token = useSelector((state) => state.auth.value);
+  const dispatch = useDispatch();
 
   function redirectToSpotify() {
     const client_id = "d816b2f689e44ea888e6c361ec59b7e3";
@@ -30,7 +34,7 @@ export default function AuthHook() {
       window.localStorage.setItem("token", token);
     }
 
-    setToken(token);
+    dispatch(authToken(token));
 
     console.log(token);
   }, [token]);
@@ -65,7 +69,7 @@ export default function AuthHook() {
   };
 
   function logout() {
-    setToken("");
+    dispatch(authToken(""));
     window.localStorage.removeItem("token");
   }
 

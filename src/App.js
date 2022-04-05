@@ -7,6 +7,8 @@ import React from "react";
 import Auth from "./pages/auth/Auth";
 import AuthHook from "./pages/auth/AuthHook";
 import Home from "./pages/auth/Home";
+import { Provider } from "react-redux";
+import store from "./redux/store";
 
 function App() {
   // const clientId = process.env.REACT_APP_CLIENT_ID;
@@ -15,32 +17,14 @@ function App() {
   });
 
   return (
-    <div className="App">
-      {/* <div className="container">
-        
-        />
-      </div> */}
-      {/* <Track
-        img={data.album.images[1].url}
-        artist={data.album.artists[0].name}
-        name={data.album.name}
-      /> */}
-      {/* <div className="container">
-        {uniq.map((track) => (
-          <React.Fragment key={track.album.id}>
-            <Track
-              img={track.album.images[1].url}
-              artist={track.album.artists[0].name}
-              name={track.album.name}
-            />
-          </React.Fragment>
-        ))}
-      </div> */}
-      {/* <Auth /> */}
-      <Home />
+    <Provider store={store}>
+      <div className="App">
+        {/* <Auth /> */}
+        <Home />
 
-      {/* <AuthHook /> */}
-    </div>
+        {/* <AuthHook /> */}
+      </div>
+    </Provider>
   );
 }
 

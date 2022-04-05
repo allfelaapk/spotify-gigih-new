@@ -182,7 +182,12 @@ export default function Home() {
       combine &&
       combine.map((track, index) => (
         <React.Fragment key={index}>
-          <TrackList track={track} onClick={() => handleClick(track)}>
+          <TrackList
+            images={track.album.images[1].url}
+            name={track.name}
+            artist={track.artists[0].name}
+            onClick={() => handleClick(track)}
+          >
             {track.isSelected ? "Deselect" : "Select"}
           </TrackList>
         </React.Fragment>
@@ -217,10 +222,16 @@ export default function Home() {
 
       <h1>{isPlaylist.name} Playlist</h1>
       <h3>{isPlaylist.description}</h3>
-      <div>
+      <div className="container">
         {trackPlaylist.map((item, index) => (
           <React.Fragment key={item.track.id}>
-            <PlaylistItem playlist={item}>Play</PlaylistItem>
+            <TrackList
+              images={item.track.album.images[1].url}
+              name={item.track.name}
+              artist={item.track.artists[0].name}
+            >
+              Play
+            </TrackList>
           </React.Fragment>
         ))}
       </div>
@@ -253,7 +264,12 @@ export default function Home() {
           <div className="container">
             {selected.map((track, index) => (
               <React.Fragment key={index}>
-                <TrackList track={track} onClick={() => handleClick(track)}>
+                <TrackList
+                  images={track.album.images[1].url}
+                  name={track.name}
+                  artist={track.artists[0].name}
+                  onClick={() => handleClick(track)}
+                >
                   {" "}
                   Deselect
                 </TrackList>
