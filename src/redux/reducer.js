@@ -1,9 +1,9 @@
-const initialState = { value: "" };
+const initialState = { token: "" };
 
 function reducer(state = initialState, action) {
   switch (action.type) {
     case "token":
-      return { ...state, value: action.payload };
+      return { ...state, token: action.payload };
     default:
       return state;
   }
