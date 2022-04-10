@@ -7,7 +7,7 @@ const scopes = "playlist-modify-private";
 const redirect_uri = "http://localhost:3000/";
 
 export default function AuthLogin() {
-  const token = useSelector((state) => state.auth.token);
+  const getToken = useSelector((state) => state.auth.token);
 
   const dispatch = useDispatch();
   function redirectToSpotify() {
@@ -32,7 +32,7 @@ export default function AuthLogin() {
 
     dispatch(authToken(token));
     console.log(token);
-  }, [token]);
+  }, [getToken, dispatch]);
 
   return (
     <button className="button" onClick={redirectToSpotify}>

@@ -6,7 +6,7 @@ const TrackList = ({ images, name, artist, onClick, children }) => {
       <tbody>
         <tr>
           <td>
-            <img className="image-opt" src={images} />
+            <img className="image-opt" src={images} alt="this-images" />
             <h3 className="artist">{artist}</h3>
             <p className="name">{name}</p>
 
