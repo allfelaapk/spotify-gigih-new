@@ -163,9 +163,10 @@ export default function Home() {
       combine.map((track, index) => (
         <React.Fragment key={index}>
           <TrackList
-            images={track.album.images[1].url}
+            images={track.album.images[0].url}
             name={track.name}
             artist={track.artists[0].name}
+            album={track.album.name}
             onClick={() => handleClick(track)}
           >
             {track.isSelected ? "Deselect" : "Select"}
@@ -183,6 +184,7 @@ export default function Home() {
       <p>ID: {isUser.id}</p>
       <form className="playlistForm" onSubmit={createPlaylist}>
         <input
+          className="title-input"
           type="text"
           placeholder="Title"
           name="title"
@@ -191,13 +193,14 @@ export default function Home() {
           value={inputPlaylist.title}
         />
         <textarea
+          className="title-input"
           type="text"
           placeholder="Description"
           name="description"
           onChange={handleInputPlaylist}
           value={inputPlaylist.description}
         />
-        <input type="submit" value="Create Playlist" />
+        <input className="btn-playlist" type="submit" value="Create Playlist" />
       </form>
 
       <h1>{isPlaylist.name} Playlist</h1>
@@ -209,6 +212,7 @@ export default function Home() {
               images={item.track.album.images[1].url}
               name={item.track.name}
               artist={item.track.artists[0].name}
+              album={item.track.album.name}
             >
               Play
             </TrackList>
@@ -240,6 +244,7 @@ export default function Home() {
               images={track.album.images[1].url}
               name={track.name}
               artist={track.artists[0].name}
+              album={track.album.name}
               onClick={() => handleClick(track)}
             >
               {" "}
