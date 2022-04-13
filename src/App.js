@@ -12,7 +12,7 @@ function App() {
 
   return (
     <Provider store={store}>
-      <div className="App">
+      <div className="bg-zinc-900 text-white">
         <SpotRouter />
       </div>
     </Provider>

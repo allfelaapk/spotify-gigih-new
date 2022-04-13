@@ -178,34 +178,18 @@ export default function Home() {
   console.log(trackPlaylist);
   return (
     <>
-      <h1> Create playlist</h1>
+      <div className="flex  mt-4 justify-end">
+        <div className="flex-col mx-4">
+          <p className=" text-white font-semibold mb-2"> {isUser.id}</p>
 
-      <p>Name: {isUser.display_name}</p>
-      <p>ID: {isUser.id}</p>
-      <form className="playlistForm" onSubmit={createPlaylist}>
-        <input
-          className="title-input"
-          type="text"
-          placeholder="Title"
-          name="title"
-          maxLength="10"
-          onChange={handleInputPlaylist}
-          value={inputPlaylist.title}
-        />
-        <textarea
-          className="title-input"
-          type="text"
-          placeholder="Description"
-          name="description"
-          onChange={handleInputPlaylist}
-          value={inputPlaylist.description}
-        />
-        <input className="btn-playlist" type="submit" value="Create Playlist" />
-      </form>
-
-      <h1>{isPlaylist.name} Playlist</h1>
+          <button className="button" onClick={logout}>
+            Logout
+          </button>
+        </div>
+      </div>
+      {isPlaylist.length === 0 ? null : <h1>{isPlaylist.name} Playlist</h1>}
       <h3>{isPlaylist.description}</h3>
-      <div className="container">
+      <div className="track-content">
         {trackPlaylist.map((item, index) => (
           <React.Fragment key={item.track.id}>
             <TrackList
@@ -219,25 +203,53 @@ export default function Home() {
           </React.Fragment>
         ))}
       </div>
+      <div className="flex flex-col w-1/4 mx-auto">
+        <h1> Create playlist</h1>
+        <form className="flex flex-col" onSubmit={createPlaylist}>
+          <input
+            className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white my-2"
+            type="text"
+            placeholder="Title"
+            name="title"
+            maxLength="10"
+            onChange={handleInputPlaylist}
+            value={inputPlaylist.title}
+          />
+          <textarea
+            className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white mb-2"
+            type="text"
+            placeholder="Description"
+            name="description"
+            onChange={handleInputPlaylist}
+            value={inputPlaylist.description}
+          />
+          <input
+            className="btn-playlist"
+            type="submit"
+            value="Create Playlist"
+          />
+        </form>
 
-      <button className="button" onClick={logout}>
-        {" "}
-        Logout
-      </button>
+        <form className="flex flex-col" onSubmit={searchTrack}>
+          <input
+            className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white my-2"
+            onChange={handleInput}
+            type="text"
+            name="search"
+            placeholder="Artist, Song, or Album"
+            value={searchKey}
+          />
+          <input className="btn-playlist" type="submit" value="Search" />
+        </form>
+      </div>
 
-      <form className="form-search" onSubmit={searchTrack}>
-        <input
-          className="searchInput"
-          onChange={handleInput}
-          type="text"
-          name="search"
-          placeholder="Artist, Song, or Album"
-          value={searchKey}
-        />
-        <input className="searchSubmit" type="submit" value="Search" />
-      </form>
+      {/* <div className="flex  w-full  ">
+        <div className="flex-col mx-auto w-1/2 justify-center">
+         
+        </div>
+      </div> */}
 
-      <div className="container">
+      <div className="track-content">
         {selected.map((track, index) => (
           <React.Fragment key={index}>
             <TrackList
@@ -254,9 +266,17 @@ export default function Home() {
         ))}
       </div>
       {selected.length === 0 ? null : (
-        <button onClick={addToPlaylist}>Save to Playlist</button>
+        <div className="flex justify-center">
+          {" "}
+          <button
+            className=" btn-playlist justify-self-center"
+            onClick={addToPlaylist}
+          >
+            Save to Playlist
+          </button>
+        </div>
       )}
-      <div className="container">{renderItem()}</div>
+      <div className="track-content">{renderItem()}</div>
     </>
   );
 }
