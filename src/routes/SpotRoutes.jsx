@@ -1,13 +1,13 @@
-import React from "react";
+import React from 'react';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Redirect,
-} from "react-router-dom";
-import { useSelector } from "react-redux";
-import Home from "../pages/home/Home";
-import AuthLogin from "../pages/auth/AuthLogin";
+} from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import Home from '../pages/home/Home';
+import AuthLogin from '../pages/auth/AuthLogin';
 
 export default function SpotRouter() {
   const { token } = useSelector((state) => state.auth);

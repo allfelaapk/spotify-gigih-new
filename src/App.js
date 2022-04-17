@@ -1,8 +1,8 @@
-import "./App.css";
-import React from "react";
-import { Provider } from "react-redux";
-import store from "./redux/store";
-import SpotRouter from "./routes/SpotRouter";
+import './App.css';
+import React from 'react';
+import { Provider } from 'react-redux';
+import store from './redux/store';
+import SpotRouter from './routes/SpotRoutes';
 
 function App() {
   // const clientId = process.env.REACT_APP_CLIENT_ID;

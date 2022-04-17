@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
-import TrackList from "../../component/trackComponent/TrackList";
-import { authToken } from "../../redux/action";
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import TrackList from '../../component/trackComponent/TrackList';
+import { authToken } from '../../redux/action';
 
 export default function Home() {
-  const [searchKey, setSearchKey] = useState("");
+  const [searchKey, setSearchKey] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [selected, setSelected] = useState([]);
   const [combine, setCombine] = useState([]);
@@ -15,7 +15,7 @@ export default function Home() {
   const dispatch = useDispatch();
 
   // *untuk mendapatkan current user
-  const [isUser, setUser] = useState("");
+  const [isUser, setUser] = useState('');
 
   // * untuk membuat playlist
   const [isPlaylist, setPlaylist] = useState([]);
@@ -23,18 +23,18 @@ export default function Home() {
   // * Add track to playlist
   const [trackPlaylist, setTrackPlaylist] = useState([]);
   const [inputPlaylist, setInputPlaylist] = useState({
-    title: "",
-    description: "",
+    title: '',
+    description: '',
   });
 
   //* function untuk mengambil api dari spotify untuk membuat playlist
   const createPlaylist = (e) => {
     e.preventDefault();
     fetch(`https://api.spotify.com/v1/users/${isUser.id}/playlists`, {
-      method: "POST",
+      method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,
-        "Content-type": "application/json",
+        'Content-type': 'application/json',
       },
       body: JSON.stringify({
         name: inputPlaylist.title,
@@ -62,11 +62,11 @@ export default function Home() {
   //* useEffect berfungsi untuk merender ulang component
   useEffect(() => {
     const getUsers = async () => {
-      const response = await fetch("https://api.spotify.com/v1/me", {
-        method: "GET",
+      const response = await fetch('https://api.spotify.com/v1/me', {
+        method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
-          "Content-type": "application/json",
+          'Content-type': 'application/json',
         },
       })
         .then((res) => res.json())
@@ -99,10 +99,10 @@ export default function Home() {
     const url = `https://api.spotify.com/v1/playlists/${isPlaylist.id}/tracks`;
     const track = selected.map((elem) => elem.uri);
     await fetch(url, {
-      method: "POST",
+      method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         uris: track,
@@ -116,10 +116,10 @@ export default function Home() {
     await fetch(
       `https://api.spotify.com/v1/playlists/${isPlaylist.id}/tracks`,
       {
-        method: "GET",
+        method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
-          "Content-Type": "application.json",
+          'Content-Type': 'application.json',
         },
       }
     )
@@ -137,52 +137,48 @@ export default function Home() {
     fetch(
       `https://api.spotify.com/v1/search?type=track&include_external=audio&q=${searchKey}`,
       {
-        method: "GET",
+        method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
-          "Content-type": "application/json",
+          'Content-type': 'application/json',
         },
       }
     )
       .then((response) => response.json())
       .then((result) => setSearchResults(result.tracks.items));
 
-    console.log(token);
+    // console.log(token);
   };
-
   function logout() {
-    dispatch(authToken(""));
-    window.localStorage.removeItem("token");
+    dispatch(authToken(''));
+    window.localStorage.removeItem('token');
   }
-  if (token === "") {
+  if (token === '') {
     return <Redirect to="/login" />;
   }
-  const renderItem = () => {
-    return (
-      combine &&
-      combine.map((track, index) => (
-        <React.Fragment key={index}>
-          <TrackList
-            images={track.album.images[0].url}
-            name={track.name}
-            artist={track.artists[0].name}
-            album={track.album.name}
-            onClick={() => handleClick(track)}
-          >
-            {track.isSelected ? "Deselect" : "Select"}
-          </TrackList>
-        </React.Fragment>
-      ))
-    );
-  };
-  console.log(trackPlaylist);
+  const renderItem = () =>
+    combine &&
+    combine.map((track) => (
+      <React.Fragment key={track.id}>
+        <TrackList
+          images={track.album.images[0].url}
+          name={track.name}
+          artist={track.artists[0].name}
+          album={track.album.name}
+          onClick={() => handleClick(track)}
+        >
+          {track.isSelected ? 'Deselect' : 'Select'}
+        </TrackList>
+      </React.Fragment>
+    ));
+  // console.log(trackPlaylist);
   return (
     <>
       <div className="flex  mt-4 justify-end">
         <div className="flex-col mx-4">
           <p className=" text-white font-semibold mb-2"> {isUser.id}</p>
 
-          <button className="button" onClick={logout}>
+          <button className="button" type="button" onClick={logout}>
             Logout
           </button>
         </div>
@@ -190,7 +186,7 @@ export default function Home() {
       {isPlaylist.length === 0 ? null : <h1>{isPlaylist.name} Playlist</h1>}
       <h3>{isPlaylist.description}</h3>
       <div className="track-content">
-        {trackPlaylist.map((item, index) => (
+        {trackPlaylist.map((item) => (
           <React.Fragment key={item.track.id}>
             <TrackList
               images={item.track.album.images[1].url}
@@ -250,8 +246,8 @@ export default function Home() {
       </div> */}
 
       <div className="track-content">
-        {selected.map((track, index) => (
-          <React.Fragment key={index}>
+        {selected.map((track) => (
+          <React.Fragment key={track.id}>
             <TrackList
               images={track.album.images[1].url}
               name={track.name}
@@ -259,7 +255,7 @@ export default function Home() {
               album={track.album.name}
               onClick={() => handleClick(track)}
             >
-              {" "}
+              {' '}
               Deselect
             </TrackList>
           </React.Fragment>
@@ -267,9 +263,10 @@ export default function Home() {
       </div>
       {selected.length === 0 ? null : (
         <div className="flex justify-center">
-          {" "}
+          {' '}
           <button
             className=" btn-playlist justify-self-center"
+            type="button"
             onClick={addToPlaylist}
           >
             Save to Playlist

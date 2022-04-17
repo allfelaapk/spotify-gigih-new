@@ -1,7 +1,17 @@
-import React from "react";
-import "../../App.css";
+import React from 'react';
+import '../../App.css';
 
-const TrackList = ({ images, name, artist, onClick, children, album }) => {
+type TrackListProps = {
+  images: string;
+  name: string;
+  artist: string;
+  onClick: () => void;
+  children: React.ReactNode;
+  album: string;
+};
+
+function TrackList(props: TrackListProps) {
+  const { images, name, artist, onClick, children, album } = props;
   return (
     <table className="card">
       <tbody>
@@ -15,7 +25,7 @@ const TrackList = ({ images, name, artist, onClick, children, album }) => {
               </div>
               <div className="track-bottom">
                 <p className="album-name">{album}</p>
-                <button className="btn" onClick={onClick}>
+                <button className="btn" type="button" onClick={onClick}>
                   {children}
                 </button>
               </div>
@@ -25,6 +35,6 @@ const TrackList = ({ images, name, artist, onClick, children, album }) => {
       </tbody>
     </table>
   );
-};
+}
 
 export default TrackList;
