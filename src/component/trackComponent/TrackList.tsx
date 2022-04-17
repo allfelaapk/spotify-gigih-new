@@ -5,6 +5,7 @@ type TrackListProps = {
   images: string;
   name: string;
   artist: string;
+  // onClick: () => void;
   onClick: () => void;
   children: React.ReactNode;
   album: string;
