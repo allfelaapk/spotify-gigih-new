@@ -26,7 +26,12 @@ function TrackList(props: TrackListProps) {
               </div>
               <div className="track-bottom">
                 <p className="album-name">{album}</p>
-                <button className="btn" type="button" onClick={onClick}>
+                <button
+                  className="btn"
+                  type="button"
+                  data-testid="test-click"
+                  onClick={onClick}
+                >
                   {children}
                 </button>
               </div>
