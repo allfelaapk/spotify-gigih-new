@@ -1,6 +1,6 @@
 function authToken(token) {
   return {
-    type: "token",
+    type: 'token',
     payload: token,
   };
 }

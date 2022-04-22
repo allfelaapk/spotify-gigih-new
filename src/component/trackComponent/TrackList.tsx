@@ -9,10 +9,11 @@ type TrackListProps = {
   onClick: () => void;
   children: React.ReactNode;
   album: string;
+  duration: string;
 };
 
 function TrackList(props: TrackListProps) {
-  const { images, name, artist, onClick, children, album } = props;
+  const { images, name, artist, onClick, children, album, duration } = props;
   return (
     <table className="card">
       <tbody>
@@ -26,6 +27,7 @@ function TrackList(props: TrackListProps) {
               </div>
               <div className="track-bottom">
                 <p className="album-name">{album}</p>
+                <p className="durate-playlist">{duration}</p>
                 <button
                   className="btn"
                   type="button"

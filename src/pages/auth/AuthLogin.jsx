@@ -25,8 +25,19 @@ export default function AuthLogin() {
   });
 
   return (
-    <button className="button" type="button" onClick={redirectToSpotify}>
-      Login with Spotify
-    </button>
+    <div className="flex justify-center my-80">
+      <div className="flex flex-col">
+        <h1 className="font-extrabold text-xl">
+          Let's Login With Your Spotify Account
+        </h1>
+        <button
+          className=" bg-green-500 hover:bg-green-600 active:bg-green-700 focus:outline-none focus:ring focus:ring-green-300 rounded-full px-4 py-2 text-white font-bold w-48 my-4 "
+          type="button"
+          onClick={redirectToSpotify}
+        >
+          Login with Spotify
+        </button>
+      </div>
+    </div>
   );
 }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+
 import TrackList from '../../component/trackComponent/TrackList';
 import { authToken } from '../../redux/action';
 
@@ -13,6 +13,12 @@ export default function Home() {
   const { token } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
+
+  function millisToMinutesSeconds(millis) {
+    const minutes = Math.floor(millis / 60000);
+    const seconds = ((millis % 60000) / 1000).toFixed(0);
+    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+  }
 
   // *untuk mendapatkan current user
   const [isUser, setUser] = useState('');
@@ -47,6 +53,10 @@ export default function Home() {
         console.log(data);
         setPlaylist(data);
       });
+    setInputPlaylist({
+      title: '',
+      description: '',
+    });
   };
 
   const handleClick = (track) => {
@@ -77,7 +87,7 @@ export default function Home() {
     getUsers();
   }, [token]);
 
-  //* useEffect ini berfungsi untuk menggabungkan state selected list dan search result
+  // * useEffect ini berfungsi untuk menggabungkan state selected list dan search result
   useEffect(() => {
     const combineTrack = searchResults.map((track) => ({
       ...track,
@@ -153,9 +163,7 @@ export default function Home() {
     dispatch(authToken(''));
     window.localStorage.removeItem('token');
   }
-  if (token === '') {
-    return <Redirect to="/login" />;
-  }
+
   const renderItem = () =>
     combine &&
     combine.map((track) => (
@@ -165,13 +173,14 @@ export default function Home() {
           name={track.name}
           artist={track.artists[0].name}
           album={track.album.name}
+          duration={millisToMinutesSeconds(track.duration_ms)}
           onClick={() => handleClick(track)}
         >
           {track.isSelected ? 'Deselect' : 'Select'}
         </TrackList>
       </React.Fragment>
     ));
-  // console.log(trackPlaylist);
+
   return (
     <>
       <div className="flex  mt-4 justify-end">
@@ -183,31 +192,53 @@ export default function Home() {
           </button>
         </div>
       </div>
-      {isPlaylist.length === 0 ? null : <h1>{isPlaylist.name} Playlist</h1>}
-      <h3>{isPlaylist.description}</h3>
-      <div className="track-content">
-        {trackPlaylist.map((item) => (
-          <React.Fragment key={item.track.id}>
-            <TrackList
-              images={item.track.album.images[1].url}
-              name={item.track.name}
-              artist={item.track.artists[0].name}
-              album={item.track.album.name}
-            >
-              Play
-            </TrackList>
-          </React.Fragment>
-        ))}
+      <div>
+        {isPlaylist.length === 0 ? null : (
+          <h1 className="text-sm font-sans font font-semibold"> PLAYLIST</h1>
+        )}
+        <h1 className="text-5xl font-extrabold">{isPlaylist.name}</h1>
+        <h1 className="text-base text-white">{isPlaylist.description}</h1>
+
+        <div className="track-content">
+          {trackPlaylist.map((item) => (
+            <React.Fragment key={item.track.id}>
+              <TrackList
+                images={item.track.album.images[1].url}
+                name={item.track.name}
+                artist={item.track.artists[0].name}
+                album={item.track.album.name}
+                duration={millisToMinutesSeconds(item.track.duration_ms)}
+              >
+                Play
+              </TrackList>
+            </React.Fragment>
+          ))}
+        </div>
       </div>
+
       <div className="flex flex-col w-1/4 mx-auto">
-        <h1> Create playlist</h1>
+        <h1 className="font-extrabold">
+          Before Create Playlist, Please Search The Track That You Want
+        </h1>
+        <form className="flex flex-col" onSubmit={searchTrack}>
+          <input
+            className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white my-2"
+            onChange={handleInput}
+            type="text"
+            name="search"
+            placeholder="Artist, Song, or Album"
+            value={searchKey}
+          />
+          <input className="btn-playlist" type="submit" value="Search" />
+        </form>
+        <h1 className="font-extrabold"> Create playlist</h1>
         <form className="flex flex-col" onSubmit={createPlaylist}>
           <input
             className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white my-2"
             type="text"
             placeholder="Title"
             name="title"
-            maxLength="10"
+            maxLength="100"
             onChange={handleInputPlaylist}
             value={inputPlaylist.title}
           />
@@ -224,18 +255,6 @@ export default function Home() {
             type="submit"
             value="Create Playlist"
           />
-        </form>
-
-        <form className="flex flex-col" onSubmit={searchTrack}>
-          <input
-            className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white my-2"
-            onChange={handleInput}
-            type="text"
-            name="search"
-            placeholder="Artist, Song, or Album"
-            value={searchKey}
-          />
-          <input className="btn-playlist" type="submit" value="Search" />
         </form>
       </div>
 
@@ -254,6 +273,7 @@ export default function Home() {
               artist={track.artists[0].name}
               album={track.album.name}
               onClick={() => handleClick(track)}
+              duration={millisToMinutesSeconds(track.duration_ms)}
             >
               {' '}
               Deselect

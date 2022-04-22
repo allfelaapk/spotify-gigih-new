@@ -10,6 +10,7 @@ test('renders tracklist component', () => {
       artist="artist"
       onClick={() => {}}
       album="album"
+      duration="string"
     >
       Test
     </TrackList>
