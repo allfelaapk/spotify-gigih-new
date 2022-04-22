@@ -4,7 +4,7 @@ import { authToken } from '../../redux/action';
 
 const clientId = 'd816b2f689e44ea888e6c361ec59b7e3';
 const scopes = 'playlist-modify-private';
-const redirectUri = 'http://localhost:3000/';
+const redirectUri = 'https://spotify-allfelaapk.vercel.app/';
 
 export default function AuthLogin() {
   const dispatch = useDispatch();
