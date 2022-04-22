@@ -1,70 +1,54 @@
-# Getting Started with Create React App
+# Final Project Assignment Generasi GIGIH 2.0
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Spotify App is my final project assignment. This project was using with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+Let see the result of this project.
+![image](https://user-images.githubusercontent.com/93808728/164740964-8bfb5ffa-19d6-46d1-b533-e264ef8f34c0.png)
+![image](https://user-images.githubusercontent.com/93808728/164741456-e49a5a1d-08a9-4a81-a650-1df4db1e4be3.png)
+![image](https://user-images.githubusercontent.com/93808728/164741556-f68c99a2-eae0-4256-9843-ff18bfc010f1.png)
+![image](https://user-images.githubusercontent.com/93808728/164741705-b8d49275-bef0-411c-ae66-1158255bca8b.png)
+![image](https://user-images.githubusercontent.com/93808728/164741777-e9116f2e-7b4f-4cd1-ac83-d3ba3f1c7c93.png)
+![image](https://user-images.githubusercontent.com/93808728/164742042-b4b5c2ca-b732-425b-a49d-14d7cce4824a.png)
 
-In the project directory, you can run:
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Features
 
-### `npm test`
+1. 🪟 authentication with Spotify API , you can login and logout with your Spotify account.
+2. 🔎 search music with Spotify API
+3. ▶️ can create playlist with form title and description
+4. 🎶 button feature to add music to playlist, you can add music to playlist with search track
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## How to Install and Run This Project
 
-### `npm run build`
+1. Clone this project
+```
+git clone https://github.com/allfelaapk/spotify-gigih-new.git
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. then go to the project directory
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
+cd my-app
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. install dependencies
+```
+npm install
+```
 
-### `npm run eject`
+4. set your env variable
+``` REACT_APP_API_KEY ``` from Spotify Client ID
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+5. start on your local server
+```
+npm start
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+6. open link ```http://localhost:3000``` and see the result.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Feedback
+Feel free to reach me on github, if you have any feedback [Here](https://github.com/allfelaapk/spotify-gigih-new/issues)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
